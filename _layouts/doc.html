@@ -1,0 +1,18 @@
+---
+layout: html
+---
+<a href="{{ site.baseurl }}/">Index</a>
+
+<hr>
+
+Parameters: [{{ page.parameters | join: "," }}]<br>
+Dependencies: [{% for dependency in page.dependencies %}{% for function in site.docs %}{% if function.title == dependency %}<a href="{{ site.baseurl }}{{ function.url }}">{{ function.title }}</a>{% endif %}{% endfor %}{% unless forloop.last %}, {% endunless %}{% endfor %}]<br>
+Returns: {{ page.returns }}<br>
+Description: {{ page.description }}
+<hr>
+
+{{ content }}
+
+<hr>
+Source<br>
+<pre>{% include {{ page.title | append: ".lqf"}} %}</pre>

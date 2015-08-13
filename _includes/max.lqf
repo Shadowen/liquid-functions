@@ -1,1 +1,3 @@
-  {{ include.arg1 | append: ',' | append: include.arg2 | split: ',' | sort | last }}
+{% raw %}
+{{ include.arg1 | append: site.lqf.psa-seperator | append: include.arg2 | split: site.lqf.psa-seperator | sort | last }}
+{% endraw %}

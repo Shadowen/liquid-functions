@@ -1,3 +1,4 @@
+{% raw %}
 {% assign ret = "" %}
 {% assign removed = "false" %}
 {% for elem in include.array %}
@@ -5,6 +6,7 @@
 		{% assign removed = "true" %}
 		{% continue %}
 	{% endif %}
-	{% assign ret = ret | append: "&" | append: {{elem}} %}
+	{% assign ret = ret | append: site.lqf.psa-seperator | append: {{elem}} %}
 {% endfor %}
-{{ ret | remove_first: "&" }}
+{{ ret | remove_first: site.lqf.psa-seperator }}
+{% endraw %}

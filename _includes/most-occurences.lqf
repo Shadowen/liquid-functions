@@ -1,36 +1,38 @@
-{% comment %}Take the parameters{% endcomment %}
-{% assign array = include.array %}
+{% raw %}
+	{% comment %}Take the parameters{% endcomment %}
+	{% assign array = include.array %}
 
-{% comment %}Generate a set out of the array{% endcomment %}
-{% assign setString = "" %}
-{% for elem in array %}
-	{% unless setString contains elem %}
-		{% assign setString = setString | append: '|' | append: elem %}
-	{% endunless %}
-{% endfor %}
-{% assign set = setString | remove_first: '|' | split: '|' %}
+	{% comment %}Generate a set out of the array{% endcomment %}
+	{% assign setString = "" %}
+	{% for elem in array %}
+		{% unless setString contains elem %}
+			{% assign setString = setString | append: site.lqf.psa-seperator | append: elem %}
+		{% endunless %}
+	{% endfor %}
+	{% assign set = setString | remove_first: site.lqf.psa-seperator | split: site.lqf.psa-seperator %}
 
-{% comment %}Remove in the set from the array until no more can be removed{% endcomment %}
-{% for x in array %}
-	{% assign removedElements = "" %}
-	{% for elem in set %}
-		{% if array contains elem %}
-			{% capture newArray %}{% include array-remove array=array remove=elem %}{% endcapture %}
-			{% assign array = newArray | split: "|" %}
-			{% assign removedElements = removedElements | append: '|' | append: elem %}
-			{% unless array contains elem %}
-				{% capture newSet %}{% include array-remove array=set remove=elem %}{% endcapture %}
-				{% assign set = newSet | split: "|" %}
-			{% endunless %}
+	{% comment %}Remove in the set from the array until no more can be removed{% endcomment %}
+	{% for x in array %}
+		{% assign removedElements = "" %}
+		{% for elem in set %}
+			{% if array contains elem %}
+				{% capture newArray %}{% include array-remove array=array remove=elem %}{% endcapture %}
+				{% assign array = newArray | split: site.lqf.psa-seperator %}
+				{% assign removedElements = removedElements | append: site.lqf.psa-seperator | append: elem %}
+				{% unless array contains elem %}
+					{% capture newSet %}{% include array-remove array=set remove=elem %}{% endcapture %}
+					{% assign set = newSet | split: site.lqf.psa-seperator %}
+				{% endunless %}
+			{% endif %}
+		{% endfor %}
+
+		{% comment %}If the array is now empty, we're done{% endcomment %}
+		{% assign arraySize = array | size %}
+		{% if arraySize == 0 %}
+			{% break %}
 		{% endif %}
 	{% endfor %}
 
-	{% comment %}If the array is now empty, we're done{% endcomment %}
-	{% assign arraySize = array | size %}
-	{% if arraySize == 0 %}
-		{% break %}
-	{% endif %}
-{% endfor %}
-
-{% comment %}Output{% endcomment %}
-{{ removedElements | remove_first: "|" }}
+	{% comment %}Output{% endcomment %}
+	{{ removedElements | remove_first: site.lqf.psa-seperator }}
+{% endraw %}

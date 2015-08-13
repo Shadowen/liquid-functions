@@ -1,6 +1,19 @@
 ---
+title: most-occurences
+description: Returns the most frequent string(s) in an array.
+dependencies: ["array-remove"]
+parameters:
+  - array : Array
+returns: pseudoArray
 ---
-{% assign array = "Cats|Dogs|Mice|Cats|Cats|Mice|Mice" | split:'|' %}
+<pre>{% raw %}
+{% assign array = "Cats|Dogs|Mice|Cats|Cats|Mice|Mice" | split: '|' %}
 {% capture mostCommonString %}{% include most-occurences array=array %}{% endcapture %}
-{% assign mostCommon = mostCommonString | split: "&" %}
+{% assign mostCommon = mostCommonString | split: site.lqf.psa-seperator %}
+{{ mostCommon | join: ", " }}
+{% endraw %}</pre>
+
+{% assign array = "Cats|Dogs|Mice|Cats|Cats|Mice|Mice" | split: '|' %}
+{% capture mostCommonString %}{% include most-occurences array=array %}{% endcapture %}
+{% assign mostCommon = mostCommonString | split: site.lqf.psa-seperator %}
 {{ mostCommon | join: ", " }}

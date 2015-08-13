@@ -1,2 +1,34 @@
 ---
+title: max
+description: Returns the greater of two numbers. 
+parameters:
+  - arg1: Number
+  - arg2: Number
+returns: Number
 ---
+
+<pre>{% raw %}{% capture x %}{% include max arg1=1 arg2=2 %}{% endcapture %}
+{{ x }}{% endraw %}</pre>
+
+{% capture x %}{% include max arg1=1 arg2=2 %}{% endcapture %}
+{{ x }}
+
+<hr>
+
+<pre>{% raw %}{% capture x %}{% include max arg1=5 arg2=-1 %}{% endcapture %}
+{{ x }}{% endraw %}</pre>
+
+{% capture x %}{% include max arg1=5 arg2=-1 %}{% endcapture %}
+{{ x }}
+
+<hr>
+
+<pre>{% raw %}{% assign x = 3.14 %}
+{% assign y = 1 | times: 0.5 %}
+{% capture z %}{% include max arg1=x arg2=y %}{% endcapture %}
+{{ z | plus: 2 }}{% endraw %}</pre>
+
+{% assign x = 3.14 %}
+{% assign y = 1 | times: 0.5 %}
+{% capture z %}{% include max arg1=x arg2=y %}{% endcapture %}
+{{ z | plus: 2 }}

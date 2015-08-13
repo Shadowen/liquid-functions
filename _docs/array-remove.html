@@ -1,11 +1,27 @@
 ---
+title: array-remove
+description: Returns a copy of <code>array</code> with the first occurence of <code>remove</code> removed. 
+parameters:
+  - array: Array
+  - remove: String
+returns: psuedoArray
 ---
 {% assign array = "Cats|Dogs|Mice|Cats|Cats|Mice|Mice" | split:'|' %}
+<pre>{% raw %}{% assign array = "Cats|Dogs|Mice|Cats|Cats|Mice|Mice" | split:'|' %}{% endraw %}</pre>
+
 Array: [{{ array | join: "," }}]<br>
+
+<pre>{% raw %}{% capture newArray %}{% include array-remove array=array remove="Dogs" %}{% endcapture %}
+{% assign array = newArray | split: site.lqf.psa-seperator %}
+{% endraw %}</pre>
 {% capture newArray %}{% include array-remove array=array remove="Dogs" %}{% endcapture %}
-{% assign array = newArray | split: "&" %}
+{% assign array = newArray | split: site.lqf.psa-seperator %}
+
 Intermediate: [{{ array | join: ","}}]<br>
+
+<pre>{% raw %}{% capture newArray %}{% include array-remove array=array remove="Cats" %}{% endcapture %}
+{% assign array = newArray | split: site.lqf.psa-seperator %}{% endraw %}</pre>
 {% capture newArray %}{% include array-remove array=array remove="Cats" %}{% endcapture %}
-{% assign array = newArray | split: "&" %}
+{% assign array = newArray | split: site.lqf.psa-seperator %}
+
 Final: [{{ array | join: "," }}]<br>
-<hr>
