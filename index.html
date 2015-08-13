@@ -4,5 +4,5 @@ layout: html
 <a href="{{ site.baseurl}}/config.yml.html">config.yml</a>
 
 {% for d in site.docs %}
-<a href="{{ site.baseurl }}{{ d.url }}"><h1>{{ d.title }}</h1></a>
+<a href="{{ site.baseurl }}{{ d.url }}"><h1>{{ d.title }}</h1></a> - {{ d.description }}
 {% endfor %}

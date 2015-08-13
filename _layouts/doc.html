@@ -9,10 +9,8 @@ Parameters: [{{ page.parameters | join: "," }}]<br>
 Dependencies: [{% for dependency in page.dependencies %}{% for function in site.docs %}{% if function.title == dependency %}<a href="{{ site.baseurl }}{{ function.url }}">{{ function.title }}</a>{% endif %}{% endfor %}{% unless forloop.last %}, {% endunless %}{% endfor %}]<br>
 Returns: {{ page.returns }}<br>
 Description: {{ page.description }}
-<hr>
-
+<h1>Examples</h1>
 {{ content }}
 
-<hr>
-Source<br>
+<h1>Source</h1>
 <pre>{% include {{ page.title | append: ".lqf"}} %}</pre>
