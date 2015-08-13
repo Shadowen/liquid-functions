@@ -1,0 +1,11 @@
+---
+---
+{% assign array = "Cats|Dogs|Mice|Cats|Cats|Mice|Mice" | split:'|' %}
+Array: [{{ array | join: "," }}]<br>
+{% capture newArray %}{% include array-remove array=array remove="Dogs" %}{% endcapture %}
+{% assign array = newArray | split: "&" %}
+Intermediate: [{{ array | join: ","}}]<br>
+{% capture newArray %}{% include array-remove array=array remove="Cats" %}{% endcapture %}
+{% assign array = newArray | split: "&" %}
+Final: [{{ array | join: "," }}]<br>
+<hr>

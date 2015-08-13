@@ -1,0 +1,6 @@
+---
+---
+{% assign array = "Cats|Dogs|Mice|Cats|Cats|Mice|Mice" | split:'|' %}
+{% capture mostCommonString %}{% include most-occurences array=array %}{% endcapture %}
+{% assign mostCommon = mostCommonString | split: "&" %}
+{{ mostCommon | join: ", " }}
